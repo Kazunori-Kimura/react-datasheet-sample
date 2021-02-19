@@ -1,6 +1,5 @@
 import { GridElement } from './types';
 import { Solid, isSolid } from '../../models/solid';
-import 'react-datasheet/lib/react-datasheet.css';
 import DataTable from './DataTable';
 
 interface SolidTableProps {
@@ -8,7 +7,7 @@ interface SolidTableProps {
     onChange?: (data: Solid[]) => void;
 }
 
-export const SolidTable: React.FC<SolidTableProps> = ({ data }) => {
+const SolidTable: React.FC<SolidTableProps> = ({ data }) => {
     /**
      * Entityから行データを生成
      * @param item
@@ -70,3 +69,5 @@ export const SolidTable: React.FC<SolidTableProps> = ({ data }) => {
         />
     );
 };
+
+export default SolidTable;

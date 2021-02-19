@@ -2,6 +2,21 @@ import ReactDataSheet from 'react-datasheet';
 import { ComparedReference, Selection } from './types';
 
 /**
+ * 数値変換
+ * @param value
+ */
+export const parseNumber = (value: string | undefined | null): number => {
+    if (value) {
+        const ret = parseFloat(value);
+        if (isNaN(ret)) {
+            return 0;
+        }
+        return ret;
+    }
+    return 0;
+};
+
+/**
  * セルの位置を比較する
  * c1 のほうが c2 より左上にある: -1 (ComparedReference.Before)
  * c1 と c2 が同じ位置: 0 (ComparedReference.Same)

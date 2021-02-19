@@ -5,6 +5,7 @@ import DataCell from './DataCell';
 import DataTableToolbar from './DataTableToolbar';
 import { usePagination } from './pagination';
 import { GridElement } from './types';
+import 'react-datasheet/lib/react-datasheet.css';
 
 interface DataTableProps<T> {
     data: T[];
@@ -21,12 +22,6 @@ interface DataTableProps<T> {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        //
-    },
-    toolbar: {
-        //
-    },
-    title: {
         //
     },
 }));
@@ -58,7 +53,11 @@ DataTableProps<T>): React.ReactElement {
      */
     const insert = (position?: number) => {
         const rows = JSON.parse(JSON.stringify(grid)) as GridElement[][];
-        const pos = position ?? rows.length;
+        const pos = position
+            ? paginationProps.page * paginationProps.rowsPerPage + position
+            : rows.length;
+
+        console.log(`insert: ${pos}`);
         const emptyRow = convertRow(null, pos);
 
         if (typeof position === 'number') {
@@ -75,6 +74,7 @@ DataTableProps<T>): React.ReactElement {
      */
     const handleInsert = () => {
         let pos = current?.row;
+        console.log(`handleInsert: ${pos}`);
         if (typeof pos === 'number') {
             pos += 1;
         }
@@ -100,7 +100,7 @@ DataTableProps<T>): React.ReactElement {
     }, [convertRow, data]);
 
     return (
-        <div className={classes.root} tabIndex={0} onKeyDown={handleKeyboardEvent}>
+        <div className={classes.root} tabIndex={-1} onKeyDown={handleKeyboardEvent}>
             <DataTableToolbar title={title} insert={handleInsert} />
             <ReactDataSheet
                 data={pageItems}

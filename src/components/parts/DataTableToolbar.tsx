@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
         //
     },
     title: {
-        //
+        flex: 1,
     },
     action: {
         //
