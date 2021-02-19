@@ -29,7 +29,10 @@ interface LoginState {
 }
 
 export const Login: React.FC<LoginProps> = ({ signIn }) => {
-    const [params, setParams] = useState<Partial<LoginState>>({});
+    const [params, setParams] = useState<Partial<LoginState>>({
+        email: 'test@example.com',
+        password: 'secret',
+    });
     const classes = useStyles();
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -69,6 +72,7 @@ export const Login: React.FC<LoginProps> = ({ signIn }) => {
                     name="email"
                     value={params.email ?? ''}
                     onChange={handleChange}
+                    autoFocus
                 />
                 <TextField
                     variant="outlined"
